@@ -15,6 +15,7 @@ app.param('person', cPerson.populatePerson);
 
 // Add routes
 app.get('/', cHome.showHome);
+app.get('/person/download', cPerson.download);
 app.get('/person/:person', cPerson.showPerson);
 
 // Catch-all 404 handler
@@ -25,11 +26,15 @@ app.use((req, res, next) => {
 // Catch-all error handler
 app.use((err, req, res, next) => {
     console.error('Error procesing request:', err);
-    res.status(500);
-    res.render('error', {
-        title: 'Error',
-        err,
-    });
+    try {
+        res.status(500);
+        res.render('error', {
+            title: 'Error',
+            err,
+        });
+    } catch (ignore) {
+        console.error('Error rendering error page: %s', ignore)
+    }
 });
 
 module.exports = app

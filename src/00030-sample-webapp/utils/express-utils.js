@@ -1,13 +1,14 @@
 const asyncWrap = (handler) => {
     return (req, res, next) => {
-        handler(req, res, next).catch(next);
+        handler(req, res, next)
+            .catch(next);
     }
 }
 
 function asyncWrapParam(handler) {
     return function (req, res, next, id) {
         handler(req, res, next, id)
-            .catch (next);
+            .catch(next);
     };
 }
 

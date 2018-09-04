@@ -1,6 +1,7 @@
 extends _layout.pug
 
 block content
+    a(href='/person/download') Download CSV
     p Showing #{personList.length} people
     ul
         each person in personList
