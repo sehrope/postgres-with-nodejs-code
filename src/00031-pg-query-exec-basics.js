@@ -1,7 +1,7 @@
 const { main, createPool } = require('./util/main');
 const { createQueryExecutor } = require('pg-query-exec');
 
-// Undelrying pool:
+// Underlying pool:
 const pool = createPool();
 
 // Create pg-query-exec wrapper:
