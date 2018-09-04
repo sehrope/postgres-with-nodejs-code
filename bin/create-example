@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+
+err () {
+    echo "$@" 1>&2
+    exit 1
+}
+
+main () {
+    local name="${1:-}"
+    [[ ! -z "${name}" ]] || err "Usage: $0 <name>"
+    local name_regex='^[a-z][a-z0-9\-]+[a-z0-9]$' 
+    [[ "${name}" =~ $name_regex ]] || err "Invalid name: ${name}"
+
+    local count=$(find src/ -maxdepth 1 -name '00*-*' | wc -l)
+    local example_dir="$(printf 'src/%05d-%s' "${count}" "${name}")"
+    local example_index="${example_dir}.js"
+    cp "src/00000-intro.js" "${example_index}"
+    echo "Created ${name} : ${example_index}"
+}
+
+main "$@"

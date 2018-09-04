@@ -1,0 +1,7 @@
+.env
+.vagrant
+dist
+lib
+node_modules
+scratch
+ubuntu*.log

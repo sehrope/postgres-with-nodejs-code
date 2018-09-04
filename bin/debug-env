@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+
+main () {
+    if which node ; then       
+      node --version
+    else
+      echo "No node binary found on your PATH"
+    fi
+
+    if which psql ; then
+      psql --version
+    else
+      echo "No psql binary found on your PATH"
+    fi
+}
+
+main "$@"

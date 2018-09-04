@@ -1,0 +1,7 @@
+extends _layout.pug
+
+block content
+    p Showing #{personList.length} people
+    ul
+        each person in personList
+            li: a(href=`/person/${person.id}`)= person.name
