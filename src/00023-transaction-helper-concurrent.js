@@ -23,11 +23,13 @@ main(async () => {
             // An error occurred somewhere so try to rollback
             try {
                 await client.query('ROLLBACK');
-                // NOTE: We could choose to release to pool here
+                // Rollback success so release back to pool
+                await client.release();
             } catch (rollbackErr) {
                 console.error('ROLLBACK Error: %s', rollbackErr);
+                // Rollback error so consider the connection broken
+                await client.release(rollbackErr);
             }
-            await client.release(rollbackErr);
             throw err;
         }
     }
